@@ -1,0 +1,30 @@
+exp=input("Enter the expression ")
+l=len(exp)
+fexp=''
+for i in range(0,l-1):
+  if exp[i].isnumeric:
+    if exp[i+1]=='x' or exp[i+1]=='y':
+      temp=''
+      print(exp[i])
+      for j in range(i+1,l):
+        if exp[j]!='+' and exp[j]!='-':
+          temp=temp+exp[j]
+        else:
+          break
+      print(temp)
+      c=exp.count(temp)
+      if c>1:
+        temp1=''
+        for i in range(0,c-1):
+          if exp[exp.find(temp,i+2)-2]=='+':
+            temp1=temp1+str(int(exp[i])+int(exp[exp.find(temp,i+2)-1]))+temp
+          elif exp[exp.find(temp,i+2)-2]=='-':
+            temp1=temp1+str(int(exp[i])-int(exp[exp.find(temp,i+2)-1]))+temp
+          exp.replace(temp,"")
+        fexp=fexp+exp[exp.find(temp,i+2)-2]+temp1
+      else:
+        fexp=fexp+exp[exp.find(temp,i+2)-2]+exp[i]+temp
+if fexp[0]=='+':
+  print(fexp[1:])
+else:
+  print(fexp)
